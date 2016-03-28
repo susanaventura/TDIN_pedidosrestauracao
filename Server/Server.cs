@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Server
 {
-    public class Register : MarshalByRefObject
+    public class Server : MarshalByRefObject
     {
         List<Order> orders;
 
-        public Register()
+        public Server()
         {
             Console.WriteLine("[Register] Register created");
             orders = new List<Order>();

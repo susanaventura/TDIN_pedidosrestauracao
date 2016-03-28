@@ -9,7 +9,8 @@ namespace RestaurantService
 {
     static class Program
     {
-        
+
+        static Server.Server server;
  
         /// <summary>
         /// The main entry point for the application.
@@ -19,6 +20,12 @@ namespace RestaurantService
         {
             RemotingConfiguration.Configure("RestaurantService.exe.config", false);
             Console.WriteLine("[RestaurantService] hosting Register");
+
+            server = new Server.Server();
+
+            server.addOrder(new Server.Order());
+            Console.WriteLine(server.getOrders().Count);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
