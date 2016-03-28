@@ -23,9 +23,6 @@ namespace RestaurantService
 
             server = new Server.Server();
 
-            server.addOrder(new Server.Order());
-            Console.WriteLine(server.getOrders().Count);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

@@ -8,6 +8,7 @@ namespace Server
     {
         List<Order> orders;
         public static SortedDictionary<int, MenuItem> menu;
+        System.Object[] tables = new System.Object[10];
 
         public Server()
         {
@@ -24,6 +25,12 @@ namespace Server
             //bar
             menu.Add(id, new MenuItem(id++, "Milkshake", RoomType.Bar, 2));
 
+            /* Tables */
+            for (int i = 0; i <= 9; i++)
+            {
+                tables[i] = i+1;
+            }
+
         }
 
 
@@ -35,6 +42,7 @@ namespace Server
         public void addOrder(Order o)
         {
             orders.Add(o);
+            Console.WriteLine(orders.Count);
         }
 
         public List<Order> getOrders()
@@ -46,7 +54,7 @@ namespace Server
 
         public void getTableBill(int destTable) { }
 
-        
+        public Object[] getTables() { return tables; }
 
 
     }
@@ -86,6 +94,15 @@ namespace Server
 
     public class Order
     {
+        static int idCounter = 0;
+        public Order(int qnt, int destTable, int item)
+        {
+            this.Id = idCounter++;
+            this.Qnt = qnt;
+            this.DestTable = destTable;
+            this.Item = item;
+        }
+
         public int Id { get; set; }
         public int Qnt { get; set; }
         public int DestTable { get; set; }
