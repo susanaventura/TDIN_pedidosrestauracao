@@ -42,7 +42,13 @@ namespace Server
         public void addOrder(Order o)
         {
             orders.Add(o);
-            Console.WriteLine(orders.Count);
+
+            Console.WriteLine("----- Orders list ------");
+            for(int i = 0; i < orders.Count; i++)
+            {
+                Console.WriteLine(orders.ElementAt(i).ToString());
+            }
+
         }
 
         public List<Order> getOrders()
@@ -108,6 +114,12 @@ namespace Server
         public int DestTable { get; set; }
         public OrderStatus Status { get; set; }
         public int Item { get; set; }
+
+        public override string ToString() {
+            return "<" + Id + "> " + "qnt=" + Qnt + ", destTable= " + DestTable + ", order=" + Server.menu[Item].Description;
+
+        }
+
     }
 
 }

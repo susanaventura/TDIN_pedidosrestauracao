@@ -32,12 +32,11 @@
             this.cmbBoxDestTable = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.cmbBoxOrder = new System.Windows.Forms.ComboBox();
             this.txtQnt = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.btnOrder = new System.Windows.Forms.Button();
+            this.txtFormError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -75,31 +74,13 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Quantity";
             // 
-            // comboBox2
+            // cmbBoxOrder
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(134, 89);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 194);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Total Price";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(131, 194);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "label5";
+            this.cmbBoxOrder.FormattingEnabled = true;
+            this.cmbBoxOrder.Location = new System.Drawing.Point(134, 89);
+            this.cmbBoxOrder.Name = "cmbBoxOrder";
+            this.cmbBoxOrder.Size = new System.Drawing.Size(121, 21);
+            this.cmbBoxOrder.TabIndex = 4;
             // 
             // txtQnt
             // 
@@ -107,19 +88,21 @@
             this.txtQnt.Name = "txtQnt";
             this.txtQnt.Size = new System.Drawing.Size(121, 20);
             this.txtQnt.TabIndex = 8;
+            this.txtQnt.Text = "1";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(180, 226);
+            this.button2.Location = new System.Drawing.Point(180, 223);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnOrder
             // 
-            this.btnOrder.Location = new System.Drawing.Point(29, 226);
+            this.btnOrder.Location = new System.Drawing.Point(29, 223);
             this.btnOrder.Name = "btnOrder";
             this.btnOrder.Size = new System.Drawing.Size(75, 23);
             this.btnOrder.TabIndex = 11;
@@ -127,17 +110,24 @@
             this.btnOrder.UseVisualStyleBackColor = true;
             this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
             // 
+            // txtFormError
+            // 
+            this.txtFormError.AutoSize = true;
+            this.txtFormError.Location = new System.Drawing.Point(116, 187);
+            this.txtFormError.Name = "txtFormError";
+            this.txtFormError.Size = new System.Drawing.Size(0, 13);
+            this.txtFormError.TabIndex = 12;
+            // 
             // CreateOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(288, 261);
+            this.ClientSize = new System.Drawing.Size(288, 268);
+            this.Controls.Add(this.txtFormError);
             this.Controls.Add(this.btnOrder);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.txtQnt);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cmbBoxOrder);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbBoxDestTable);
@@ -155,11 +145,10 @@
         private System.Windows.Forms.ComboBox cmbBoxDestTable;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbBoxOrder;
         private System.Windows.Forms.TextBox txtQnt;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnOrder;
+        private System.Windows.Forms.Label txtFormError;
     }
 }

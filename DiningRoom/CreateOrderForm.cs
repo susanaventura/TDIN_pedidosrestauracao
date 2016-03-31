@@ -13,22 +13,60 @@ namespace DiningRoom
 {
     public partial class CreateOrderForm : Form
     {
+        SortedDictionary<int, Server.MenuItem> menu;
+
         public CreateOrderForm()
         {
             InitializeComponent();
+            
+            cmbBoxDestTable.Items.AddRange(Program.server.getTables());
+            
+            menu = Program.server.getMenu();
 
-            ComboBox tables = this.Controls.Find("cmbBoxDestTable", true).FirstOrDefault() as ComboBox;
-            tables.Items.AddRange(Program.server.getTables());
+            System.Object[] orders = new System.Object[Program.server.getMenu().Count];
 
+            for(int i = 0; i < orders.Length; i++)
+            {
+                orders[i] = menu.ElementAt(i).Value.Description + " | " + menu.ElementAt(i).Value.Price + "€";
+            }
+
+            cmbBoxOrder.Items.AddRange(orders);
             
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            int qnt = Int32.Parse((this.Controls.Find("txtQnt", true).FirstOrDefault() as TextBox).Text);
-            int destTable = Int32.Parse((this.Controls.Find("cmbBoxDestTable", true).FirstOrDefault() as TextBox).Text);
-            int item = 1;
+
+            if (cmbBoxDestTable.SelectedIndex == -1 || cmbBoxOrder.SelectedIndex == -1 || txtQnt.Text.Trim().Length == 0)
+            {
+                txtFormError.Text = "You cannot have blank fields.";
+                return;
+            }
+
+
+            int qnt;
+            try {
+                qnt = Int32.Parse(txtQnt.Text);
+            } catch(Exception)
+            {
+                txtFormError.Text = "Quantity must be a valid integer.";
+                return;
+            }
+
+            txtFormError.Text = "";
+
+            int destTable = Int32.Parse(cmbBoxDestTable.Text);
+
+            int item = menu.ElementAt(cmbBoxOrder.SelectedIndex).Value.Id;
+
             Program.server.addOrder(new Order(qnt, destTable, item));
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.FindForm().Close();
+        }
+
+
     }
 }
