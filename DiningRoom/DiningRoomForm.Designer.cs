@@ -1,6 +1,6 @@
 ﻿namespace DiningRoom
 {
-    partial class Form1
+    partial class DiningRoomForm
     {
         /// <summary>
         /// Required designer variable.

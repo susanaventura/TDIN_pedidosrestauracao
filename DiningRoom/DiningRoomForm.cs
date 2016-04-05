@@ -7,20 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RemoteObject;
 
 namespace DiningRoom
 {
-    public partial class Form1 : Form
+    public partial class DiningRoomForm : Form
     {
-        public Form1()
+        RemoteObj server;
+
+        public DiningRoomForm()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CreateOrderForm createorder = new CreateOrderForm();
+            CreateOrderForm createorder = new CreateOrderForm(server);
             createorder.Show();
+        }
+
+        internal void SetRemoteObject(RemoteObj remoteObj)
+        {
+            server = remoteObj;
         }
     }
 }

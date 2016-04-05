@@ -52,19 +52,19 @@
     <Compile Include="CreateOrderForm.Designer.cs">
       <DependentUpon>CreateOrderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="DiningRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="DiningRoomForm.Designer.cs">
+      <DependentUpon>DiningRoomForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="DiningRoomProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CreateOrderForm.resx">
       <DependentUpon>CreateOrderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="DiningRoomForm.resx">
+      <DependentUpon>DiningRoomForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -89,9 +89,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestaurantService\RestaurantService.csproj">
-      <Project>{07e8ce85-6958-4e44-83e5-a547b9b12d6d}</Project>
-      <Name>RestaurantService</Name>
+    <ProjectReference Include="..\RemoteObject\RemoteObject.csproj">
+      <Project>{0068ea4e-0715-45d9-9e10-298668bfb6a0}</Project>
+      <Name>RemoteObject</Name>
     </ProjectReference>
     <ProjectReference Include="..\Server\Server.csproj">
       <Project>{33b1eb22-cde6-4130-b1b5-d6616e69eebc}</Project>

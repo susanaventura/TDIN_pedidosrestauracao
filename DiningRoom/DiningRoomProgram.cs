@@ -5,13 +5,14 @@ using System.Runtime.Remoting;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace DiningRoom
 {
 
-    static class Program
+    static class DiningRoomProgram
     {
-        public static Server.Server server;
-
+       
+   
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -21,12 +22,12 @@ namespace DiningRoom
             RemotingConfiguration.Configure("DiningRoom.exe.config", false);
             Console.WriteLine("[DiningRoom] connecting to Server");
 
-            server = new Server.Server();
-
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            DiningRoomForm form = new DiningRoomForm();
+            form.SetRemoteObject(new RemoteObject.RemoteObj());
+            Application.Run(form);
+
         }
     }
 }
