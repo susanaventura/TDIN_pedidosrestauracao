@@ -69,10 +69,9 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
 
     }
 
-    public Boolean ping()
+    public void ping(string name)
     {
-        Console.WriteLine("ping");
-        return true;
+        Console.WriteLine("[Register] " + name + " connected");
     }
 
 }

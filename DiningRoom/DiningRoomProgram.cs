@@ -18,11 +18,11 @@ namespace DiningRoom
         static void Main()
         {
             RemotingConfiguration.Configure("DiningRoom.exe.config", false);
-            Console.WriteLine("[DiningRoom] connecting to Server");
 
+            Console.WriteLine("[DiningRoom] connecting to Server...");
             IRemoteObj remote = (IRemoteObj)GetRemote.New(typeof(IRemoteObj));
-            Console.WriteLine(remote.ping());
-
+            remote.ping("DiningRoom");
+            Console.WriteLine("[DiningRoom] connected.");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -32,30 +32,5 @@ namespace DiningRoom
         }
     }
 
-    public class GetRemote
-    {
-        private static IDictionary wellKnownTypes;
-
-        public static object New(Type type)
-        {
-            if (wellKnownTypes == null)
-                InitTypeCache();
-            WellKnownClientTypeEntry entry = (WellKnownClientTypeEntry)wellKnownTypes[type];
-            if (entry == null)
-                throw new RemotingException("Type not found!");
-            return Activator.GetObject(type, entry.ObjectUrl);
-        }
-
-        public static void InitTypeCache()
-        {
-            Hashtable types = new Hashtable();
-            foreach (WellKnownClientTypeEntry entry in RemotingConfiguration.GetRegisteredWellKnownClientTypes())
-            {
-                if (entry.ObjectType == null)
-                    throw new RemotingException("A configured type could not be found!");
-                types.Add(entry.ObjectType, entry);
-            }
-            wellKnownTypes = types;
-        }
-    }
+    
 }

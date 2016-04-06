@@ -53,10 +53,11 @@ namespace DiningRoom
 
            txtFormError.Text = "";
 
-           int destTable = Int32.Parse(cmbBoxDestTable.Text);
+           int destTable = cmbBoxDestTable.SelectedIndex;
 
            int item = menu.ElementAt(cmbBoxOrder.SelectedIndex).Value.Id;
 
+            Console.WriteLine(qnt + " " + destTable + " " + item);
            server.addOrder(new Order(qnt, destTable, item));
         }
 
