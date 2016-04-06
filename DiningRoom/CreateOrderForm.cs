@@ -8,31 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RemoteObject;
 
 namespace DiningRoom
 {
     public partial class CreateOrderForm : Form
     {
-        RemoteObject.RemoteObj server;
+        IRemoteObj server;
         SortedDictionary<int, RemoteObject.MenuItem> menu;
 
-        public CreateOrderForm(RemoteObject.RemoteObj server)
+        public CreateOrderForm(IRemoteObj server)
         {
-           InitializeComponent();
+            InitializeComponent();
+
             this.server = server;
+            menu = server.getMenu();
 
-           cmbBoxDestTable.Items.AddRange(server.getTables());
-
-           menu = server.getMenu();
-
-           System.Object[] orders = new System.Object[menu.Count];
-
-           for(int i = 0; i < orders.Length; i++)
-           {
-               orders[i] = menu.ElementAt(i).Value.Description + " | " + menu.ElementAt(i).Value.Price + "€";
-           }
-
-           cmbBoxOrder.Items.AddRange(orders);
+            cmbBoxDestTable.Items.AddRange(server.getTables().ToArray());
+            
+            for(int i = 0; i < menu.Count; i++)
+            {
+                cmbBoxOrder.Items.Add(menu.ElementAt(i).Value.Description + " | " + menu.ElementAt(i).Value.Price + "€");
+            }
 
         }
 
@@ -44,7 +41,6 @@ namespace DiningRoom
                txtFormError.Text = "You cannot have blank fields.";
                return;
            }
-
 
            int qnt;
            try {
@@ -61,7 +57,7 @@ namespace DiningRoom
 
            int item = menu.ElementAt(cmbBoxOrder.SelectedIndex).Value.Id;
 
-           server.addOrder(new RemoteObject.Order(qnt, destTable, item));
+           server.addOrder(new Order(qnt, destTable, item));
         }
 
         private void button2_Click(object sender, EventArgs e)

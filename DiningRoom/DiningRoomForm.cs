@@ -13,10 +13,11 @@ namespace DiningRoom
 {
     public partial class DiningRoomForm : Form
     {
-        RemoteObj server;
+        IRemoteObj server;
 
-        public DiningRoomForm()
+        public DiningRoomForm(IRemoteObj remoteObject)
         {
+            this.server = remoteObject;
             InitializeComponent();
         }
 
@@ -25,10 +26,7 @@ namespace DiningRoom
             CreateOrderForm createorder = new CreateOrderForm(server);
             createorder.Show();
         }
-
-        internal void SetRemoteObject(RemoteObj remoteObj)
-        {
-            server = remoteObj;
-        }
     }
+
+
 }
