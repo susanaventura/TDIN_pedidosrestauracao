@@ -19,7 +19,12 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
 {
     List<Order> orders;
     SortedDictionary<int, MenuItem> menu;
-    List<string> tables;
+    List<bool> tables;
+
+    public event OrderHandler UpdateOrder;
+
+    public event TableHandler GetBill;
+    public event TableHandler PayBill;
 
     public RemoteObj()
     {
@@ -38,36 +43,64 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
         AddToMenu(new MenuItem("Milkshake", RoomType.Bar, 2));
 
         // Tables
-        tables = new List<string>();
+        tables = new List<bool>();
 
-        for (int i = 0; i < 10; i++) { tables.Add("" + (i + 1)); }
+        for (int i = 0; i < 10; i++) { tables.Add(true); }
     }
+
+    public override object InitializeLifetimeService()  { return null; }
+
 
     private void AddToMenu(MenuItem item) { menu.Add(item.Id, item); }
 
-
     public List<Order> getOrders() { return orders; }
-    public List<string> getTables() { return tables; }
+    public List<bool> getTables() { return tables; }
     public SortedDictionary<int, MenuItem> getMenu() { return menu; }
-    public void getTableBill(int destTable) { /*TODO*/ }
-
-
-    public void setOrderStatus(int order, OrderStatus s)
-    {
-        orders.Where(o => o.Id == order).ToList().ForEach(updated_order => updated_order.Status = s);
-    }
+    
 
     public void addOrder(Order o)
     {
         orders.Add(o);
+        if (UpdateOrder != null) UpdateOrder(o);
 
         Console.WriteLine("----- Orders list ------");
         for (int i = 0; i < orders.Count; i++)
         {
             Console.WriteLine(orders.ElementAt(i).ToString());
         }
-
     }
+
+    public void setOrderStatus(Order order, OrderStatus s)
+    {
+        orders.Where(o => o.Id == order.Id).ToList().ForEach(updated_order => updated_order.Status = s);
+        UpdateOrder(order);
+    }
+
+
+    public void getTableBill(int table) {
+        List<Order> tableOrders = orders.Where(o => o.Table == table).ToList();
+        Console.WriteLine("----- Bill for table "+table+" ------");
+        for (int i = 0; i < tableOrders.Count; i++) Console.WriteLine(tableOrders[i]);
+
+        tables[table] = false;
+
+        if (UpdateOrder != null) UpdateOrder(null);
+        if (GetBill != null) GetBill(table, tableOrders);
+    }
+
+    public void payTableBill(int table) {
+        List<Order> tableOrders = orders.Where(o => o.Table == table).ToList();
+        Console.WriteLine("----- Invoice for table " + table + " ------");
+        for (int i = 0; i < tableOrders.Count; i++) Console.WriteLine(tableOrders[i]);
+
+        tables[table] = true;
+        orders = orders.Where(o => o.Table != table).ToList();
+
+        if (UpdateOrder != null) UpdateOrder(null);
+        if (PayBill != null) PayBill(table, tableOrders);
+    }
+
+
 
     public void ping(string name)
     {

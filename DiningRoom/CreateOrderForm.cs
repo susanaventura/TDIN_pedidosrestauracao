@@ -14,17 +14,21 @@ namespace DiningRoom
 {
     public partial class CreateOrderForm : Form
     {
-        IRemoteObj server;
+        IRemoteObj remote;
         SortedDictionary<int, RemoteObject.MenuItem> menu;
 
-        public CreateOrderForm(IRemoteObj server)
+        public CreateOrderForm(IRemoteObj remote)
         {
             InitializeComponent();
 
-            this.server = server;
-            menu = server.getMenu();
+            this.remote = remote;
+            menu = remote.getMenu();
 
-            cmbBoxDestTable.Items.AddRange(server.getTables().ToArray());
+            for (int i = 0; i < remote.getTables().Count; i++)
+            {
+                cmbBoxDestTable.Items.Add(i+1);
+            }
+            
             
             for(int i = 0; i < menu.Count; i++)
             {
@@ -36,29 +40,28 @@ namespace DiningRoom
         private void btnOrder_Click(object sender, EventArgs e)
         {
 
-           if (cmbBoxDestTable.SelectedIndex == -1 || cmbBoxOrder.SelectedIndex == -1 || txtQnt.Text.Trim().Length == 0)
-           {
-               txtFormError.Text = "You cannot have blank fields.";
-               return;
-           }
+            if (cmbBoxDestTable.SelectedIndex == -1 || cmbBoxOrder.SelectedIndex == -1 || txtQnt.Text.Trim().Length == 0)
+            {
+                txtFormError.Text = "You cannot have blank fields.";
+                return;
+            }
 
-           int qnt;
-           try {
-               qnt = Int32.Parse(txtQnt.Text);
-           } catch(Exception)
-           {
-               txtFormError.Text = "Quantity must be a valid integer.";
-               return;
-           }
+            int qnt;
+            try {
+                qnt = Int32.Parse(txtQnt.Text);
+            } catch(Exception)
+            {
+                txtFormError.Text = "Quantity must be a valid integer.";
+                return;
+            }
 
-           txtFormError.Text = "";
+            txtFormError.Text = "";
 
-           int destTable = cmbBoxDestTable.SelectedIndex;
+            int destTable = cmbBoxDestTable.SelectedIndex;
 
-           int item = menu.ElementAt(cmbBoxOrder.SelectedIndex).Value.Id;
+            int item = menu.ElementAt(cmbBoxOrder.SelectedIndex).Value.Id;
 
-            Console.WriteLine(qnt + " " + destTable + " " + item);
-           server.addOrder(new Order(qnt, destTable, item));
+            remote.addOrder(new Order(qnt, destTable, item));
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -20,15 +20,15 @@ namespace DiningRoom
             RemotingConfiguration.Configure("DiningRoom.exe.config", false);
 
             Console.WriteLine("[DiningRoom] connecting to Server...");
+
             IRemoteObj remote = (IRemoteObj)GetRemote.New(typeof(IRemoteObj));
             remote.ping("DiningRoom");
+
             Console.WriteLine("[DiningRoom] connected.");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DiningRoomForm(remote));
-
-            
+            Application.Run(new DiningRoomForm(remote));            
         }
     }
 
