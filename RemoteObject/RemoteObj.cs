@@ -93,11 +93,13 @@ namespace RemoteObject
         static int idCounter = 0;
         public Order(int qnt, int table, int item)
         {
-            this.Id = Order.idCounter++;
+            NewId();
             this.Quantity = qnt;
             this.Table = table;
             this.Item = item;
         }
+
+        public void NewId() { Id = Order.idCounter++; }
 
         public override string ToString()
         {
@@ -106,6 +108,20 @@ namespace RemoteObject
                 + ", table= " + Table //server.getTables().ElementAt(DestTable) +
                 + ", order=" + Item //server.getMenu()[Item].Description;
                 ;
+        }
+
+        public float GetPrice(SortedDictionary<int, MenuItem> menu) {
+            if (menu == null || !menu.ContainsKey(Item)) return 0;
+            return Quantity * menu[Item].Price;
+        }
+
+        public string ToString(SortedDictionary<int, MenuItem> menu) {
+            if (menu == null || !menu.ContainsKey(Item)) return "";
+            MenuItem item = menu[Item];
+
+            return Quantity + "x " 
+                + item.Description + " - " 
+                + GetPrice(menu) + " euro(s)";
         }
 
     }
