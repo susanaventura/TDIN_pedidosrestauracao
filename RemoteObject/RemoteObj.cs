@@ -78,6 +78,9 @@ namespace RemoteObject
         }
     }
 
+
+
+    #region Order
     [Serializable]
     public class Order
     {
@@ -108,9 +111,10 @@ namespace RemoteObject
     }
 
 
+    #endregion
 
-    
-    /////////////////////////////////////////////////////// 
+
+    #region GetRemote
 
     public class GetRemote
     {
@@ -138,4 +142,5 @@ namespace RemoteObject
             wellKnownTypes = types;
         }
     }
+    #endregion
 }

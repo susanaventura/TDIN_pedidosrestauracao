@@ -132,7 +132,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Name = "DiningRoomForm";
-            this.Text = "Form1";
+            this.Text = "Dining Room";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
