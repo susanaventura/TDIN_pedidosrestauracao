@@ -57,11 +57,17 @@ namespace DiningRoom
 
             txtFormError.Text = "";
 
-            int destTable = cmbBoxDestTable.SelectedIndex;
+            int table = cmbBoxDestTable.SelectedIndex;
+
+            if (!remote.getTables()[table])
+            {
+                txtFormError.Text = "Table has already asked for bill.";
+                return;
+            }
 
             int item = menu.ElementAt(cmbBoxOrder.SelectedIndex).Value.Id;
 
-            remote.addOrder(new Order(qnt, destTable, item));
+            remote.addOrder(new Order(qnt, table, item));
         }
 
         private void button2_Click(object sender, EventArgs e)
