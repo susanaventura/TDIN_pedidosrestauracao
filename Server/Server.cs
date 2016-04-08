@@ -72,7 +72,7 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
     public void setOrderStatus(Order order, OrderStatus s)
     {
         orders.Where(o => o.Id == order.Id).ToList().ForEach(updated_order => updated_order.Status = s);
-        UpdateOrder(order);
+        if (UpdateOrder != null) UpdateOrder(order);
     }
 
 
