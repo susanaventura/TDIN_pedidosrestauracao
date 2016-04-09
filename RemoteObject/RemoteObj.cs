@@ -42,23 +42,9 @@ namespace RemoteObject
     }
 
     
-    public enum RoomType
-    {
-        Bar = 'b',
-        Kitchen = 'k'
-    }
+    public enum RoomType { Bar, Kitchen }
 
-    public enum OrderStatus
-    {
-        Waiting = 'w',
-        Processing = 'p',
-        Done = 'd'
-    }
-
-    public enum TableStatus {
-        Open = 'o',
-        Closed = 'c'   
-    }
+    public enum OrderStatus { Waiting, Processing, Done }
 
     [Serializable]
     public class MenuItem
@@ -115,18 +101,24 @@ namespace RemoteObject
             return Quantity * menu[Item].Price;
         }
 
-        public string ToString(SortedDictionary<int, MenuItem> menu)
+        public string ToStringStatus(SortedDictionary<int, MenuItem> menu)
         {
             MenuItem item = menu[Item];
 
-            return Quantity + "x "+ item.Description;
+            return Quantity + "x "+ item.Description 
+                + " from " + item.Type.ToString() 
+                + " to table " + (Table+1) 
+                + ": " + Status.ToString();
         }
 
         public string ToStringBill(SortedDictionary<int, MenuItem> menu)
         {
             MenuItem item = menu[Item];
 
-            return ToString(menu) + " - " + GetPrice(menu) + " euro(s)";
+            return Quantity+"x "
+                + item.Description + " - "
+                + item.Price + " euro(s) - total:"
+                + GetPrice(menu) + " euro(s)";
         }
 
     }

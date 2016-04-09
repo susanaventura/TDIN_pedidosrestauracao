@@ -60,24 +60,27 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
 
     public void addOrder(Order o)
     {
-        if (o.Table > tables.Count || !tables[o.Table]) return;
+        if (o.Table < tables.Count && tables[o.Table])
+        {
+            o.NewId();
+            orders.Add(o);
+        }
 
-        o.NewId();
-        orders.Add(o);
         if (UpdateOrder != null) UpdateOrder(o);
-
         Console.WriteLine("[Register] New order: " + o.ToStringBill(menu));
     }
 
     public void setOrderStatus(Order order, OrderStatus s)
     {
         orders.Where(o => o.Id == order.Id).ToList().ForEach(updated_order => updated_order.Status = s);
+
         if (UpdateOrder != null) UpdateOrder(order);
+        Console.WriteLine("[Register] Order status change: " + order.ToStringBill(menu));
     }
 
 
     public void getTableBill(int table) {
-        Console.WriteLine("[Register] Bill for table " + table);
+        Console.WriteLine("[Register] Bill for table " + (table+1));
 
         List<Order> tableOrders = orders.Where(o => o.Table == table).ToList();
 
@@ -88,7 +91,7 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
     }
 
     public void payTableBill(int table) {
-        Console.WriteLine("[Register] Invoice for table " + table);
+        Console.WriteLine("[Register] Invoice for table " + (table+1));
 
         List<Order> tableOrders = orders.Where(o => o.Table == table).ToList();        
 

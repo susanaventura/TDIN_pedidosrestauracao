@@ -37,9 +37,10 @@ namespace DiningRoom
         // Button 2 (Get Bill)
         private void button2_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Bill for table " + comboBoxTables.SelectedItem);
-            if (comboBoxTables.SelectedIndex >= 0) {                
-                remote.getTableBill((comboBoxTables.SelectedItem as UIKeyValuePair).Key);
+            Console.WriteLine("Bill for table " + listBoxTables.SelectedItem);
+            if (listBoxTables.SelectedIndex >= 0) {
+                remote.getTableBill((listBoxTables.SelectedItem as UIKeyValuePair).Key);
+                listBoxTables.SelectedIndex = -1;
             }
         }
 
@@ -57,9 +58,9 @@ namespace DiningRoom
 
         // Table Combo Box
 
-        private void ComboBoxTables_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBoxTables_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int ind = comboBoxTables.SelectedIndex;
+            int ind = listBoxTables.SelectedIndex;
 
             if (ind == -1)
             {
@@ -67,7 +68,7 @@ namespace DiningRoom
             }
             else
             {
-                int table = (comboBoxTables.SelectedItem as UIKeyValuePair).Key;
+                int table = (listBoxTables.SelectedItem as UIKeyValuePair).Key;
                 List<Order> orders = remote.getOrders();
                 listBoxTableBill.Items.Clear();
                 float total = 0;
@@ -94,37 +95,27 @@ namespace DiningRoom
             List<Order> orders = remote.getOrders();
             List<bool> tables = remote.getTables();
 
-            // List 1
-            listViewDoneOrders.Items.Clear();
-            listViewPendingOrders.Items.Clear();
+            // Order Listing
+            listBoxDoneOrders.Items.Clear();
+            listBoxPendingOrders.Items.Clear();
             foreach (Order o in orders) {
-                ListView list;
-                Color color = Color.White;
+                ListBox list = (o.Status == OrderStatus.Done) ? listBoxDoneOrders : listBoxPendingOrders;
 
-                list = (o.Status == OrderStatus.Done) ? listViewDoneOrders : listViewPendingOrders;
-                switch (o.Status) {
-                    case OrderStatus.Waiting: color = Color.Red; break;
-                    case OrderStatus.Processing: color = Color.Yellow; break;
-                    case OrderStatus.Done: color = Color.Green; break;
-                }
-
-                ListViewItem item = new ListViewItem(o.ToString(menu));
-                item.BackColor = color;
-                item.Tag = o;
-                list.Items.Add(item);
+                list.Items.Add(o.ToStringStatus(menu));
                 tables_served.Add(o.Table);
             }
 
-            // ComboBoxTables
-            comboBoxTables.Items.Clear();
+            // Tables Listing
+            listBoxTables.SelectedIndex = -1;
+            listBoxTables.Items.Clear();
             foreach (int i in tables_served) {
-                if (tables[i]) comboBoxTables.Items.Add(new UIKeyValuePair(i, "Table " + (i + 1)));
+                if (tables[i]) listBoxTables.Items.Add(new UIKeyValuePair(i, "Table " + (i + 1)));
             }
         }
 
 
         // Aux
-        private class UIKeyValuePair
+        public class UIKeyValuePair
         {
             public int Key { get; set; }
             public string Value { get; set; }
@@ -140,7 +131,6 @@ namespace DiningRoom
             }
         }
 
-       
     }
 
 

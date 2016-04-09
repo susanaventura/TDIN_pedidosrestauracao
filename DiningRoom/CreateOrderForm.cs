@@ -24,9 +24,11 @@ namespace DiningRoom
             this.remote = remote;
             menu = remote.getMenu();
 
-            for (int i = 0; i < remote.getTables().Count; i++)
+            List<bool> tables = remote.getTables();
+
+            for (int i = 0; i < tables.Count; i++)
             {
-                cmbBoxDestTable.Items.Add(i+1);
+                if (tables[i]) cmbBoxDestTable.Items.Add(new DiningRoomForm.UIKeyValuePair(i,"Table "+(i+1)));
             }
             
             
@@ -57,7 +59,7 @@ namespace DiningRoom
 
             txtFormError.Text = "";
 
-            int table = cmbBoxDestTable.SelectedIndex;
+            int table = (cmbBoxDestTable.SelectedItem as DiningRoomForm.UIKeyValuePair).Key;
 
             if (!remote.getTables()[table])
             {
