@@ -110,25 +110,29 @@ namespace RemoteObject
                 ;
         }
 
-        public float GetPrice(SortedDictionary<int, MenuItem> menu) {
-            if (menu == null || !menu.ContainsKey(Item)) return 0;
+        public float GetPrice(SortedDictionary<int, MenuItem> menu)
+        {
             return Quantity * menu[Item].Price;
         }
 
-        public string ToString(SortedDictionary<int, MenuItem> menu) {
-            if (menu == null || !menu.ContainsKey(Item)) return "";
+        public string ToString(SortedDictionary<int, MenuItem> menu)
+        {
             MenuItem item = menu[Item];
 
-            return Quantity + "x " 
-                + item.Description + " - " 
-                + GetPrice(menu) + " euro(s)";
+            return Quantity + "x "+ item.Description;
+        }
+
+        public string ToStringBill(SortedDictionary<int, MenuItem> menu)
+        {
+            MenuItem item = menu[Item];
+
+            return ToString(menu) + " - " + GetPrice(menu) + " euro(s)";
         }
 
     }
 
 
     #endregion
-
 
     #region GetRemote
 
