@@ -28,7 +28,7 @@ namespace DiningRoom
 
             for (int i = 0; i < tables.Count; i++)
             {
-                if (tables[i]) cmbBoxDestTable.Items.Add(new DiningRoomForm.UIKeyValuePair(i,"Table "+(i+1)));
+                if (tables[i]) cmbBoxDestTable.Items.Add(new UIKeyValuePair(i, "Table "+(i+1)));
             }
             
             
@@ -38,7 +38,8 @@ namespace DiningRoom
             }
 
         }
-
+    
+        // Order
         private void btnOrder_Click(object sender, EventArgs e)
         {
 
@@ -59,7 +60,7 @@ namespace DiningRoom
 
             txtFormError.Text = "";
 
-            int table = (cmbBoxDestTable.SelectedItem as DiningRoomForm.UIKeyValuePair).Key;
+            int table = (cmbBoxDestTable.SelectedItem as UIKeyValuePair).Key;
 
             if (!remote.getTables()[table])
             {
@@ -70,11 +71,14 @@ namespace DiningRoom
             int item = menu.ElementAt(cmbBoxOrder.SelectedIndex).Value.Id;
 
             remote.addOrder(new Order(qnt, table, item));
+
+            FindForm().Close();
         }
 
+        // Cancel
         private void button2_Click(object sender, EventArgs e)
         {
-           this.FindForm().Close();
+            FindForm().Close();
         }
 
     }

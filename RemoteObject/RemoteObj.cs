@@ -10,7 +10,7 @@ namespace RemoteObject
     public delegate void OrderHandler(Order order);
     public delegate void TableHandler(int table, List<Order> orders);
 
-
+    #region Interface
     public interface IRemoteObj
     {
         event OrderHandler UpdateOrder;
@@ -29,8 +29,9 @@ namespace RemoteObject
 
         void ping(string name);
     }
+    #endregion
 
-    
+    #region Intermediate
     public class Intermediate : MarshalByRefObject {
         public event OrderHandler UpdateOrder;
         public event TableHandler GetBill;
@@ -40,8 +41,9 @@ namespace RemoteObject
         public void FireGetBill(int table, List<Order> orders) { GetBill(table, orders); }
         public void FirePayBill(int table, List<Order> orders) { PayBill(table, orders); }
     }
+    #endregion
 
-    
+    #region Objects
     public enum RoomType { Bar, Kitchen }
 
     public enum OrderStatus { Waiting, Processing, Done }
@@ -63,8 +65,7 @@ namespace RemoteObject
             this.Price = price;
         }
     }
-
-
+    #endregion
 
     #region Order
     [Serializable]
@@ -122,8 +123,6 @@ namespace RemoteObject
         }
 
     }
-
-
     #endregion
 
     #region GetRemote
@@ -152,6 +151,25 @@ namespace RemoteObject
                 types.Add(entry.ObjectType, entry);
             }
             wellKnownTypes = types;
+        }
+    }
+    #endregion
+
+    #region Aux
+    public class UIKeyValuePair
+    {
+        public int Key { get; set; }
+        public string Value { get; set; }
+
+        public UIKeyValuePair(int key, string value)
+        {
+            this.Key = key;
+            this.Value = value;
+        }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
     #endregion

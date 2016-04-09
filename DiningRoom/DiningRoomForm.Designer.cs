@@ -68,6 +68,7 @@ namespace DiningRoom
             // 
             // btnGetBill
             // 
+            this.btnGetBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGetBill.Location = new System.Drawing.Point(180, 292);
             this.btnGetBill.Name = "btnGetBill";
             this.btnGetBill.Size = new System.Drawing.Size(75, 23);

@@ -114,23 +114,6 @@ namespace DiningRoom
         }
 
 
-        // Aux
-        public class UIKeyValuePair
-        {
-            public int Key { get; set; }
-            public string Value { get; set; }
-
-            public UIKeyValuePair(int key, string value)
-            {
-                this.Key = key;
-                this.Value = value;
-            }
-
-            public override string ToString() {
-                return Value;
-            }
-        }
-
     }
 
 

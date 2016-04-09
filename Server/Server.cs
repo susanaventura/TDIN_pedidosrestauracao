@@ -36,11 +36,11 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
         // Menu
         menu = new SortedDictionary<int, MenuItem>();
 
-        //kitchen
-        AddToMenu(new MenuItem("Big Mac", RoomType.Kitchen, 5));
+            //kitchen
+            AddToMenu(new MenuItem("Big Mac", RoomType.Kitchen, 5));
 
-        //bar
-        AddToMenu(new MenuItem("Milkshake", RoomType.Bar, 2));
+            //bar
+            AddToMenu(new MenuItem("Milkshake", RoomType.Bar, 2));
 
         // Tables
         tables = new List<bool>();
