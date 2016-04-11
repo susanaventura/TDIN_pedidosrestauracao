@@ -70,7 +70,7 @@ namespace DiningRoom
 
             int item = menu.ElementAt(cmbBoxOrder.SelectedIndex).Value.Id;
 
-            remote.addOrder(new Order(qnt, table, item));
+            remote.addOrder(new Order(qnt, table, item, cmbBoxOrder.SelectedItem.ToString()));
 
             FindForm().Close();
         }

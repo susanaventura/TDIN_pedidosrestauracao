@@ -69,6 +69,7 @@
             this.btnBarToPrep.TabIndex = 5;
             this.btnBarToPrep.Text = "v";
             this.btnBarToPrep.UseVisualStyleBackColor = true;
+            this.btnBarToPrep.Click += new System.EventHandler(this.btnBarToPrep_Click);
             // 
             // btnBarDone
             // 
@@ -78,6 +79,7 @@
             this.btnBarDone.TabIndex = 6;
             this.btnBarDone.Text = "Done";
             this.btnBarDone.UseVisualStyleBackColor = true;
+            this.btnBarDone.Click += new System.EventHandler(this.btnBarDone_Click);
             // 
             // btnKitchenDone
             // 
@@ -87,6 +89,7 @@
             this.btnKitchenDone.TabIndex = 11;
             this.btnKitchenDone.Text = "Done";
             this.btnKitchenDone.UseVisualStyleBackColor = true;
+            this.btnKitchenDone.Click += new System.EventHandler(this.btnKitchenDone_Click);
             // 
             // btnKitchenToPrep
             // 
@@ -96,6 +99,7 @@
             this.btnKitchenToPrep.TabIndex = 10;
             this.btnKitchenToPrep.Text = "v";
             this.btnKitchenToPrep.UseVisualStyleBackColor = true;
+            this.btnKitchenToPrep.Click += new System.EventHandler(this.btnKitchenToPrep_Click);
             // 
             // lstBoxKitchenPreparing
             // 
