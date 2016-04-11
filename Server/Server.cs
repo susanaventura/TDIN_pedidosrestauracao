@@ -66,6 +66,7 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
             orders.Add(o);
         }
 
+       
         if (UpdateOrder != null) UpdateOrder(o);
         Console.WriteLine("[Register] New order: " + o.ToStringBill(menu));
     }

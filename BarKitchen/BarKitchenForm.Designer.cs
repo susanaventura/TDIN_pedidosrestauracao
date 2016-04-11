@@ -1,6 +1,6 @@
 ﻿namespace Bar
 {
-    partial class Form1
+    partial class BarKitchenForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.lstBarPreparing = new System.Windows.Forms.ListView();
+            this.lstBoxBarPreparing = new System.Windows.Forms.ListBox();
             this.btnBarToPrep = new System.Windows.Forms.Button();
             this.btnBarDone = new System.Windows.Forms.Button();
             this.btnKitchenDone = new System.Windows.Forms.Button();
             this.btnKitchenToPrep = new System.Windows.Forms.Button();
-            this.lstKitchenPreparing = new System.Windows.Forms.ListView();
-            this.lstBarPending = new System.Windows.Forms.ListView();
-            this.lstKitchenPending = new System.Windows.Forms.ListView();
+            this.lstBoxKitchenPreparing = new System.Windows.Forms.ListBox();
+            this.lstBoxBarPending = new System.Windows.Forms.ListBox();
+            this.lstBoxKitchenPending = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,13 +54,12 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Bar";
             // 
-            // lstBarPreparing
+            // lstBoxBarPreparing
             // 
-            this.lstBarPreparing.Location = new System.Drawing.Point(12, 245);
-            this.lstBarPreparing.Name = "lstBarPreparing";
-            this.lstBarPreparing.Size = new System.Drawing.Size(233, 111);
-            this.lstBarPreparing.TabIndex = 3;
-            this.lstBarPreparing.UseCompatibleStateImageBehavior = false;
+            this.lstBoxBarPreparing.Location = new System.Drawing.Point(12, 245);
+            this.lstBoxBarPreparing.Name = "lstBoxBarPreparing";
+            this.lstBoxBarPreparing.Size = new System.Drawing.Size(233, 108);
+            this.lstBoxBarPreparing.TabIndex = 3;
             // 
             // btnBarToPrep
             // 
@@ -98,29 +97,26 @@
             this.btnKitchenToPrep.Text = "v";
             this.btnKitchenToPrep.UseVisualStyleBackColor = true;
             // 
-            // lstKitchenPreparing
+            // lstBoxKitchenPreparing
             // 
-            this.lstKitchenPreparing.Location = new System.Drawing.Point(323, 245);
-            this.lstKitchenPreparing.Name = "lstKitchenPreparing";
-            this.lstKitchenPreparing.Size = new System.Drawing.Size(233, 111);
-            this.lstKitchenPreparing.TabIndex = 12;
-            this.lstKitchenPreparing.UseCompatibleStateImageBehavior = false;
+            this.lstBoxKitchenPreparing.Location = new System.Drawing.Point(323, 245);
+            this.lstBoxKitchenPreparing.Name = "lstBoxKitchenPreparing";
+            this.lstBoxKitchenPreparing.Size = new System.Drawing.Size(233, 108);
+            this.lstBoxKitchenPreparing.TabIndex = 12;
             // 
-            // lstBarPending
+            // lstBoxBarPending
             // 
-            this.lstBarPending.Location = new System.Drawing.Point(16, 62);
-            this.lstBarPending.Name = "lstBarPending";
-            this.lstBarPending.Size = new System.Drawing.Size(233, 111);
-            this.lstBarPending.TabIndex = 13;
-            this.lstBarPending.UseCompatibleStateImageBehavior = false;
+            this.lstBoxBarPending.Location = new System.Drawing.Point(16, 62);
+            this.lstBoxBarPending.Name = "lstBoxBarPending";
+            this.lstBoxBarPending.Size = new System.Drawing.Size(233, 108);
+            this.lstBoxBarPending.TabIndex = 13;
             // 
-            // lstKitchenPending
+            // lstBoxKitchenPending
             // 
-            this.lstKitchenPending.Location = new System.Drawing.Point(323, 62);
-            this.lstKitchenPending.Name = "lstKitchenPending";
-            this.lstKitchenPending.Size = new System.Drawing.Size(233, 111);
-            this.lstKitchenPending.TabIndex = 14;
-            this.lstKitchenPending.UseCompatibleStateImageBehavior = false;
+            this.lstBoxKitchenPending.Location = new System.Drawing.Point(323, 62);
+            this.lstBoxKitchenPending.Name = "lstBoxKitchenPending";
+            this.lstBoxKitchenPending.Size = new System.Drawing.Size(233, 108);
+            this.lstBoxKitchenPending.TabIndex = 14;
             // 
             // label2
             // 
@@ -168,7 +164,7 @@
             this.label6.TabIndex = 19;
             this.label6.Text = "Pending";
             // 
-            // Form1
+            // BarKitchenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -178,16 +174,16 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lstKitchenPending);
-            this.Controls.Add(this.lstBarPending);
-            this.Controls.Add(this.lstKitchenPreparing);
+            this.Controls.Add(this.lstBoxKitchenPending);
+            this.Controls.Add(this.lstBoxBarPending);
+            this.Controls.Add(this.lstBoxKitchenPreparing);
             this.Controls.Add(this.btnKitchenDone);
             this.Controls.Add(this.btnKitchenToPrep);
             this.Controls.Add(this.btnBarDone);
             this.Controls.Add(this.btnBarToPrep);
-            this.Controls.Add(this.lstBarPreparing);
+            this.Controls.Add(this.lstBoxBarPreparing);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "BarKitchenForm";
             this.Text = "Bar and Kitchen";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -197,14 +193,14 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView lstBarPreparing;
+        private System.Windows.Forms.ListBox lstBoxBarPreparing;
         private System.Windows.Forms.Button btnBarToPrep;
         private System.Windows.Forms.Button btnBarDone;
         private System.Windows.Forms.Button btnKitchenDone;
         private System.Windows.Forms.Button btnKitchenToPrep;
-        private System.Windows.Forms.ListView lstKitchenPreparing;
-        private System.Windows.Forms.ListView lstBarPending;
-        private System.Windows.Forms.ListView lstKitchenPending;
+        private System.Windows.Forms.ListBox lstBoxKitchenPreparing;
+        private System.Windows.Forms.ListBox lstBoxBarPending;
+        private System.Windows.Forms.ListBox lstBoxKitchenPending;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
