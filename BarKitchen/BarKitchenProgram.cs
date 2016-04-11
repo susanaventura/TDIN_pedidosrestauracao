@@ -1,14 +1,11 @@
 ﻿using RemoteObject;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Remoting;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Bar
+namespace BarKitchen
 {
-    static class Program
+    static class BarKitchenProgram
     {
         /// <summary>
         /// The main entry point for the application.
@@ -18,12 +15,8 @@ namespace Bar
         {
             RemotingConfiguration.Configure("BarKitchen.exe.config", false);
 
-            Console.WriteLine("[BarKitchen] connecting to Server...");
-
-            IRemoteObj remote = (IRemoteObj)GetRemote.New(typeof(IRemoteObj));
-            remote.ping("BarKitchen");
-
-            Console.WriteLine("[BarKitchen] connected.");
+            IRemoteObj remote = Server.RemoteConnect("BarKitchen");
+            if (remote == null) return;            
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

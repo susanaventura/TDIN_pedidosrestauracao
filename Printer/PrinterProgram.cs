@@ -14,9 +14,8 @@ namespace Printer
         {
             RemotingConfiguration.Configure("Printer.exe.config", false);
 
-            Console.WriteLine("[Printer] connecting to Server...");
-            remote = (IRemoteObj)GetRemote.New(typeof(IRemoteObj));
-            remote.ping("Printer");
+            remote = Server.RemoteConnect("Printer");
+            if (remote == null) return;
 
             menu = remote.getMenu();
 
@@ -27,7 +26,7 @@ namespace Printer
             remote.GetBill += inter.FireGetBill;
             remote.PayBill += inter.FirePayBill;            
 
-            Console.WriteLine("[Printer] connected. Press return to exit.");
+            Console.WriteLine("[Printer] Press return to exit.");
             Console.ReadLine();
         }
 

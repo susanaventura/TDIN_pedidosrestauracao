@@ -1,9 +1,6 @@
 ﻿using RemoteObject;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Remoting;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Payments
@@ -18,12 +15,8 @@ namespace Payments
         {
             RemotingConfiguration.Configure("Payments.exe.config", false);
 
-            Console.WriteLine("[Payments] connecting to Server...");
-
-            IRemoteObj remote = (IRemoteObj)GetRemote.New(typeof(IRemoteObj));
-            remote.ping("Payments");
-
-            Console.WriteLine("[Payments] connected.");
+            IRemoteObj remote = Server.RemoteConnect("Payments");
+            if (remote == null) return;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

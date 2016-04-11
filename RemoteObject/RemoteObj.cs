@@ -28,7 +28,7 @@ namespace RemoteObject
         void getTableBill(int destTable);
         void payTableBill(int destTable);
 
-        void ping(string name);
+        void connect(string name);
     }
     #endregion
 

@@ -1,6 +1,5 @@
 ﻿using RemoteObject;
 using System;
-using System.Collections;
 using System.Runtime.Remoting;
 using System.Windows.Forms;
 
@@ -10,7 +9,6 @@ namespace DiningRoom
     static class DiningRoomProgram
     {
        
-   
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,12 +17,8 @@ namespace DiningRoom
         {
             RemotingConfiguration.Configure("DiningRoom.exe.config", false);
 
-            Console.WriteLine("[DiningRoom] connecting to Server...");
-
-            IRemoteObj remote = (IRemoteObj)GetRemote.New(typeof(IRemoteObj));
-            remote.ping("DiningRoom");
-
-            Console.WriteLine("[DiningRoom] connected.");
+            IRemoteObj remote = Server.RemoteConnect("DiningRoom");
+            if (remote == null) return;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -1,4 +1,4 @@
-﻿namespace Bar
+﻿namespace BarKitchen
 {
     partial class BarKitchenForm
     {

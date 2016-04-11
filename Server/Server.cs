@@ -4,32 +4,53 @@ using System.Collections.Generic;
 using RemoteObject;
 using System.Linq;
 
-class Server
+public class Server
 {
     static void Main(string[] args)
     {
         RemotingConfiguration.Configure("Server.exe.config", false);
-        Console.WriteLine("[Server]: Press return to exit");
+        Console.WriteLine("[Server] Press return to exit");
         Console.ReadLine();
+    }
+
+    public static IRemoteObj RemoteConnect(string name) {
+        try
+        {
+            Console.WriteLine("[" + name + "] connecting to Server...");
+
+            IRemoteObj remote = (IRemoteObj)GetRemote.New(typeof(IRemoteObj));
+            remote.connect(name);
+
+            Console.WriteLine("[" + name + "] connected.");
+            return remote;
+        }
+        catch (System.Net.Sockets.SocketException)
+        {
+            Console.WriteLine("[" + name + "] connection failed!");
+            return null;
+        }
     }
 }
 
-
 public class RemoteObj : MarshalByRefObject, IRemoteObj
 {
+    #region events
+    public event OrderHandler UpdateOrder;
+
+    public event TableHandler GetBill;
+    public event TableHandler PayBill;
+    #endregion
+
+    #region state_init
+
     List<Order> orders;
     SortedDictionary<int, MenuItem> menu;
     SortedDictionary<int, int> sales;
     List<bool> tables;
 
-    public event OrderHandler UpdateOrder;
-
-    public event TableHandler GetBill;
-    public event TableHandler PayBill;
-
     public RemoteObj()
     {
-        Console.WriteLine("[Register] Register created");
+        Console.WriteLine("[Server] Register created.");
 
         // Orders
         orders = new List<Order>();
@@ -57,18 +78,19 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
 
         for (int i = 0; i < 10; i++) { tables.Add(true); }
     }
-
-    public override object InitializeLifetimeService()  { return null; }
-
-
     private void AddToMenu(MenuItem item) { menu.Add(item.Id, item); }
+
+    public override object InitializeLifetimeService() { return null; }
+    #endregion
+
+    #region interface_methods
 
     public List<Order> getOrders() { return orders; }
     public List<bool> getTables() { return tables; }
     public SortedDictionary<int, MenuItem> getMenu() { return menu; }
     public SortedDictionary<int, int> getSales() { return sales; }
 
-
+    // Add Order
     public void addOrder(Order o)
     {
         if (o.Table < tables.Count 
@@ -82,30 +104,32 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
 
        
         if (UpdateOrder != null) UpdateOrder(o);
-        Console.WriteLine("[Register] New order: " + o.ToStringBill(menu));
+        Console.WriteLine("[Server] New order: " + o.ToStringBill(menu));
     }
 
+    // Set Order Status
     public void setOrderStatus(Order order, OrderStatus s)
     {
         orders.Where(o => o.Id == order.Id).ToList().ForEach(updated_order => updated_order.Status = s);
 
         if (UpdateOrder != null) UpdateOrder(order);
-        Console.WriteLine("[Register] Order status change: " + order.ToStringBill(menu));
+        Console.WriteLine("[Server] Order status change: " + order.ToStringBill(menu));
     }
 
+    // Get Table Bill (consulta de mesa)
     public void getTableBill(int table) {
-        Console.WriteLine("[Register] Bill for table " + (table+1));
-
         List<Order> tableOrders = orders.Where(o => o.Table == table).ToList();
 
         tables[table] = false;
 
         if (UpdateOrder != null) UpdateOrder(null);
         if (GetBill != null) GetBill(table, tableOrders);
+        Console.WriteLine("[Server] Bill for table " + (table + 1));
     }
 
+    // Pay Table Bill (emissao de fatura)
     public void payTableBill(int table) {
-        Console.WriteLine("[Register] Invoice for table " + (table+1));
+        Console.WriteLine("[Server] Invoice for table " + (table+1));
 
         List<Order> tableOrders = orders.Where(o => o.Table == table).ToList();        
 
@@ -118,9 +142,11 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
         if (PayBill != null) PayBill(table, tableOrders);
     }
 
-    public void ping(string name)
+    // Connect
+    public void connect(string name)
     {
-        Console.WriteLine("[Register] " + name + " connected");
+        Console.WriteLine("[Server] " + name + " connected");
     }
 
+    #endregion
 }

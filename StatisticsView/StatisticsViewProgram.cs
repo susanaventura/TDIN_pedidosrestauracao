@@ -1,9 +1,6 @@
 ﻿using RemoteObject;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Remoting;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StatisticsView
@@ -17,13 +14,9 @@ namespace StatisticsView
         static void Main()
         {
             RemotingConfiguration.Configure("StatisticsView.exe.config", false);
-
-            Console.WriteLine("[StatisticsView] connecting to Server...");
-
-            IRemoteObj remote = (IRemoteObj)GetRemote.New(typeof(IRemoteObj));
-            remote.ping("StatisticsView");
-
-            Console.WriteLine("[StatisticsView] connected.");
+            
+            IRemoteObj remote = Server.RemoteConnect("StatisticsView");
+            if (remote == null) return;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
