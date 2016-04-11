@@ -40,10 +40,10 @@ namespace Bar
 
             // Order Listing
             lstBoxBarPending.Items.Clear();
-            lstBoxBarPreparing.Items.Clear();
+            lstBoxBarProcessing.Items.Clear();
 
             lstBoxKitchenPending.Items.Clear();
-            lstBoxKitchenPreparing.Items.Clear();
+            lstBoxKitchenProcessing.Items.Clear();
 
             foreach (Order o in orders)
             {
@@ -52,7 +52,7 @@ namespace Bar
 
                 if (menu[o.Item].Type == RoomType.Bar)
                 {
-                    ListBox list = (o.Status == OrderStatus.Processing) ? lstBoxBarPreparing : lstBoxBarPending;
+                    ListBox list = (o.Status == OrderStatus.Processing) ? lstBoxBarProcessing : lstBoxBarPending;
 
                     list.Items.Add(o);
                     list.DisplayMember = "OrderDescription";
@@ -60,7 +60,7 @@ namespace Bar
                 }
                 else if (menu[o.Item].Type == RoomType.Kitchen)
                 {
-                    ListBox list = (o.Status == OrderStatus.Processing) ? lstBoxKitchenPreparing : lstBoxKitchenPending;
+                    ListBox list = (o.Status == OrderStatus.Processing) ? lstBoxKitchenProcessing : lstBoxKitchenPending;
 
                     list.Items.Add(o);
                     list.DisplayMember = "OrderDescription";
@@ -83,14 +83,14 @@ namespace Bar
 
         private void btnBarDone_Click(object sender, EventArgs e)
         {
-            if (lstBoxBarPreparing.SelectedItem != null)
-                remote.setOrderStatus((Order)lstBoxBarPreparing.SelectedItem, OrderStatus.Done);
+            if (lstBoxBarProcessing.SelectedItem != null)
+                remote.setOrderStatus((Order)lstBoxBarProcessing.SelectedItem, OrderStatus.Done);
         }
 
         private void btnKitchenDone_Click(object sender, EventArgs e)
         {
-            if (lstBoxKitchenPreparing.SelectedItem != null)
-                remote.setOrderStatus((Order)lstBoxKitchenPreparing.SelectedItem, OrderStatus.Done);
+            if (lstBoxKitchenProcessing.SelectedItem != null)
+                remote.setOrderStatus((Order)lstBoxKitchenProcessing.SelectedItem, OrderStatus.Done);
         }
     }
 }

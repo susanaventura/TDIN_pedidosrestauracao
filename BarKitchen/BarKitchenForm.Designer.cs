@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.lstBoxBarPreparing = new System.Windows.Forms.ListBox();
+            this.lstBoxBarProcessing = new System.Windows.Forms.ListBox();
             this.btnBarToPrep = new System.Windows.Forms.Button();
             this.btnBarDone = new System.Windows.Forms.Button();
             this.btnKitchenDone = new System.Windows.Forms.Button();
             this.btnKitchenToPrep = new System.Windows.Forms.Button();
-            this.lstBoxKitchenPreparing = new System.Windows.Forms.ListBox();
+            this.lstBoxKitchenProcessing = new System.Windows.Forms.ListBox();
             this.lstBoxBarPending = new System.Windows.Forms.ListBox();
             this.lstBoxKitchenPending = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,12 +54,12 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Bar";
             // 
-            // lstBoxBarPreparing
+            // lstBoxBarProcessing
             // 
-            this.lstBoxBarPreparing.Location = new System.Drawing.Point(12, 245);
-            this.lstBoxBarPreparing.Name = "lstBoxBarPreparing";
-            this.lstBoxBarPreparing.Size = new System.Drawing.Size(233, 108);
-            this.lstBoxBarPreparing.TabIndex = 3;
+            this.lstBoxBarProcessing.Location = new System.Drawing.Point(12, 245);
+            this.lstBoxBarProcessing.Name = "lstBoxBarProcessing";
+            this.lstBoxBarProcessing.Size = new System.Drawing.Size(233, 108);
+            this.lstBoxBarProcessing.TabIndex = 3;
             // 
             // btnBarToPrep
             // 
@@ -101,12 +101,12 @@
             this.btnKitchenToPrep.UseVisualStyleBackColor = true;
             this.btnKitchenToPrep.Click += new System.EventHandler(this.btnKitchenToPrep_Click);
             // 
-            // lstBoxKitchenPreparing
+            // lstBoxKitchenProcessing
             // 
-            this.lstBoxKitchenPreparing.Location = new System.Drawing.Point(323, 245);
-            this.lstBoxKitchenPreparing.Name = "lstBoxKitchenPreparing";
-            this.lstBoxKitchenPreparing.Size = new System.Drawing.Size(233, 108);
-            this.lstBoxKitchenPreparing.TabIndex = 12;
+            this.lstBoxKitchenProcessing.Location = new System.Drawing.Point(323, 245);
+            this.lstBoxKitchenProcessing.Name = "lstBoxKitchenProcessing";
+            this.lstBoxKitchenProcessing.Size = new System.Drawing.Size(233, 108);
+            this.lstBoxKitchenProcessing.TabIndex = 12;
             // 
             // lstBoxBarPending
             // 
@@ -137,18 +137,18 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(13, 229);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 16;
-            this.label3.Text = "Preparing";
+            this.label3.Text = "Processing";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(329, 229);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 13);
+            this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 17;
-            this.label4.Text = "Preparing";
+            this.label4.Text = "Processing";
             // 
             // label5
             // 
@@ -180,12 +180,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lstBoxKitchenPending);
             this.Controls.Add(this.lstBoxBarPending);
-            this.Controls.Add(this.lstBoxKitchenPreparing);
+            this.Controls.Add(this.lstBoxKitchenProcessing);
             this.Controls.Add(this.btnKitchenDone);
             this.Controls.Add(this.btnKitchenToPrep);
             this.Controls.Add(this.btnBarDone);
             this.Controls.Add(this.btnBarToPrep);
-            this.Controls.Add(this.lstBoxBarPreparing);
+            this.Controls.Add(this.lstBoxBarProcessing);
             this.Controls.Add(this.label1);
             this.Name = "BarKitchenForm";
             this.Text = "Bar and Kitchen";
@@ -197,12 +197,12 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lstBoxBarPreparing;
+        private System.Windows.Forms.ListBox lstBoxBarProcessing;
         private System.Windows.Forms.Button btnBarToPrep;
         private System.Windows.Forms.Button btnBarDone;
         private System.Windows.Forms.Button btnKitchenDone;
         private System.Windows.Forms.Button btnKitchenToPrep;
-        private System.Windows.Forms.ListBox lstBoxKitchenPreparing;
+        private System.Windows.Forms.ListBox lstBoxKitchenProcessing;
         private System.Windows.Forms.ListBox lstBoxBarPending;
         private System.Windows.Forms.ListBox lstBoxKitchenPending;
         private System.Windows.Forms.Label label2;
