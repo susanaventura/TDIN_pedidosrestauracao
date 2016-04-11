@@ -38,9 +38,14 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
 
             //kitchen
             AddToMenu(new MenuItem("Big Mac", RoomType.Kitchen, 5));
+            AddToMenu(new MenuItem("Cheeseburger", RoomType.Kitchen, 3));
+            AddToMenu(new MenuItem("Chicken Nuggets", RoomType.Kitchen, 2));
+            AddToMenu(new MenuItem("Beef", RoomType.Kitchen, 8.5f));
 
             //bar
             AddToMenu(new MenuItem("Milkshake", RoomType.Bar, 2));
+            AddToMenu(new MenuItem("Water", RoomType.Bar, 0.75f));
+            AddToMenu(new MenuItem("Juice", RoomType.Bar, 1.5f));
 
         // Tables
         tables = new List<bool>();
