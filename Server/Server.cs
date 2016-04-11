@@ -19,6 +19,7 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
 {
     List<Order> orders;
     SortedDictionary<int, MenuItem> menu;
+    SortedDictionary<int, int> sales;
     List<bool> tables;
 
     public event OrderHandler UpdateOrder;
@@ -50,6 +51,10 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
         // Tables
         tables = new List<bool>();
 
+        //Sales
+        sales = new SortedDictionary<int, int>();
+        foreach (int item in menu.Keys) { sales[item] = 0; }
+
         for (int i = 0; i < 10; i++) { tables.Add(true); }
     }
 
@@ -61,11 +66,15 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
     public List<Order> getOrders() { return orders; }
     public List<bool> getTables() { return tables; }
     public SortedDictionary<int, MenuItem> getMenu() { return menu; }
-    
+    public SortedDictionary<int, int> getSales() { return sales; }
+
 
     public void addOrder(Order o)
     {
-        if (o.Table < tables.Count && tables[o.Table])
+        if (o.Table < tables.Count 
+            && tables[o.Table] 
+            && o.Quantity > 0 
+            && menu.ContainsKey(o.Item))
         {
             o.NewId();
             orders.Add(o);
@@ -84,7 +93,6 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
         Console.WriteLine("[Register] Order status change: " + order.ToStringBill(menu));
     }
 
-
     public void getTableBill(int table) {
         Console.WriteLine("[Register] Bill for table " + (table+1));
 
@@ -102,13 +110,13 @@ public class RemoteObj : MarshalByRefObject, IRemoteObj
         List<Order> tableOrders = orders.Where(o => o.Table == table).ToList();        
 
         tables[table] = true;
+        foreach(Order o in tableOrders) { sales[o.Item] += o.Quantity; }
         orders = orders.Where(o => o.Table != table).ToList();
+        
 
         if (UpdateOrder != null) UpdateOrder(null);
         if (PayBill != null) PayBill(table, tableOrders);
     }
-
-
 
     public void ping(string name)
     {

@@ -20,6 +20,7 @@ namespace RemoteObject
         List<Order> getOrders();
         List<bool> getTables();
         SortedDictionary<int, MenuItem> getMenu();
+        SortedDictionary<int, int> getSales();
 
         void addOrder(Order o);
         void setOrderStatus(Order order, OrderStatus s);
