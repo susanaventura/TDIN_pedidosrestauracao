@@ -25,8 +25,10 @@ namespace Payments
             RefreshView();
 
             Intermediate inter = new Intermediate();
-            inter.UpdateOrder += RefreshViewHandler;
-            remote.UpdateOrder += inter.FireUpdateOrder;
+            inter.GetBill += RefreshViewHandler;
+            inter.PayBill += RefreshViewHandler;
+            remote.GetBill += inter.FireGetBill;            
+            remote.PayBill += inter.FirePayBill;
         }
 
         // Table select
@@ -65,7 +67,7 @@ namespace Payments
 
         // Refresh the View
         delegate void RefreshViewDelegate(); 
-        private void RefreshViewHandler(Order order)
+        private void RefreshViewHandler(int table, List<Order> orders)
         {
             BeginInvoke(new RefreshViewDelegate(RefreshView), new object[] {});
         }

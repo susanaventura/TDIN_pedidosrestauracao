@@ -69,7 +69,7 @@
             this.listBoxBill.FormattingEnabled = true;
             this.listBoxBill.Location = new System.Drawing.Point(129, 55);
             this.listBoxBill.Name = "listBoxBill";
-            this.listBoxBill.Size = new System.Drawing.Size(202, 173);
+            this.listBoxBill.Size = new System.Drawing.Size(265, 173);
             this.listBoxBill.TabIndex = 4;
             // 
             // label3
@@ -84,7 +84,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(163, 251);
+            this.button1.Location = new System.Drawing.Point(196, 251);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 29);
             this.button1.TabIndex = 5;
@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 292);
+            this.ClientSize = new System.Drawing.Size(406, 292);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBoxBill);
             this.Controls.Add(this.label3);
