@@ -114,7 +114,7 @@
             this.Controls.Add(this.listBoxMostSold);
             this.Controls.Add(this.label1);
             this.Name = "StatisticsViewForm";
-            this.Text = "Form1";
+            this.Text = "Statistics";
             this.ResumeLayout(false);
             this.PerformLayout();
 
