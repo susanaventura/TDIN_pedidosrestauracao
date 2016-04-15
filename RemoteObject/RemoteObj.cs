@@ -78,6 +78,8 @@ namespace RemoteObject
         public OrderStatus Status { get; set; }
         public int Item { get; set; }
 
+        private string orderDescription;
+
         static int idCounter = 0;
         public Order(int qnt, int table, int item, string itemDescription)
         {
@@ -85,11 +87,19 @@ namespace RemoteObject
             this.Quantity = qnt;
             this.Table = table;
             this.Item = item;
+            this.orderDescription = Quantity + "x " + itemDescription + " to table " + (table + 1);
         }
 
         public void NewId() { Id = Order.idCounter++; }
 
-        public override string ToString()
+        public string OrderDescription
+        {
+            get{
+                return orderDescription;
+            }
+        }
+
+public override string ToString()
         {
             return "<" + Id + "> "
                 + "qnt=" + Quantity
